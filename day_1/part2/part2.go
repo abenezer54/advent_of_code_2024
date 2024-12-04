@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"sort"
 )
 
 func main() {
@@ -20,18 +19,16 @@ func main() {
 		b = append(b, y)
 	}
 
-	sort.Ints(a)
-	sort.Ints(b)
-	ans := 0
-
-	for i := 0; i < 1000; i++ {
-		val := a[i] - b[i]
-		if val < 0 {
-			val *= -1
-		}
-		ans += val
+	cnt := make(map[int]int)
+	for _, num := range b {
+		cnt[num]++
 	}
 
-	fmt.Print(ans)
+	ans := 0
+	for _, num := range a {
+		ans +=  num * cnt[num]
+	}
 
+
+	fmt.Println(ans)
 }
